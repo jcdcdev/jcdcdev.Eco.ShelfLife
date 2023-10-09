@@ -15,13 +15,13 @@ jobs:
               run: |
                 sudo apt-get install pandoc
                 pandoc .github/README.md -s -o README.html
-                $README_HTML=cat README.html
+                $README_HTML=(cat README.html)
                 echo "README_HTML=$README_HTML" >> "$GITHUB_ENV"
             - name: Use README HTML
               run: |
                 echo "The HTML of the README file is $README_HTML"
-            # - name: Update modio mod description
-            #   run: |
-            #     curl -X PUT 'https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}' \
-            #     -H 'Authorization: Bearer ${{ secrets.MODIO_TOKEN }}' \
-            #     --data-urlencode 'description@/dev/stdin' <<< "${{ steps.convert.outputs.README_HTML }}"}'
+            - name: Update modio mod description
+              run: |
+                curl -X PUT 'https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}' \
+                -H 'Authorization: Bearer ${{ secrets.MODIO_TOKEN }}' \
+                -d 'description=$README_HTML'
