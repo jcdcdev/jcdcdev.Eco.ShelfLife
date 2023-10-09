@@ -14,11 +14,12 @@ jobs:
               id: convert
               run: |
                 sudo apt-get install pandoc
-                README_HTML=$(pandoc .github/README.md -s -o README.html)
-                echo "::set-output name=README_HTML::$README_HTML"
+                pandoc .github/README.md -s -o README.html
+                $README_HTML = cat README.html
+                echo "README_HTML=$README_HTML" >> "$GITHUB_ENV"
             - name: Use README HTML
               run: |
-                echo "The HTML of the README file is ${{ steps.convert.outputs.README_HTML }}"
+                echo "The HTML of the README file is $README_HTML"
             # - name: Update modio mod description
             #   run: |
             #     curl -X PUT 'https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}' \
