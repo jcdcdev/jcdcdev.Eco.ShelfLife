@@ -8,14 +8,13 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - name: Install Showdown
-              run: npm install showdown -g
+            - name: Install pandoc
+              run: sudo apt-get install pandoc
             - name: Convert README to HTML
               id: convert
               run: |
-                sudo apt-get install pandoc
-                pandoc .github/README.md -s -o README.html
-                echo "README_HTML='$(cat README.html)'" >> "$GITHUB_ENV"
+                pandoc .github/README.md -o README.html
+                echo "README_HTML=$(cat README.html)" >> "$GITHUB_ENV"
             - name: Use README HTML
               run: |
                 echo "The HTML of the README file is $README_HTML"
