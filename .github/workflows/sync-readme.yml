@@ -13,10 +13,14 @@ jobs:
             - name: Convert README to HTML
               id: convert
               run: |
-                html_content=$(showdown makehtml -i .github/README.md | base64)
-                echo "::set-output name=html_content::$html_content"
-            - name: Update modio mod description
+                sudo apt-get install pandoc
+                README_HTML=$(pandoc .github/README.md -s -o README.html)
+                echo "::set-output name=README_HTML::$README_HTML"
+            - name: Use README HTML
               run: |
-                curl -X PUT 'https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}' \
-                -H 'Authorization: Bearer ${{ secrets.MODIO_TOKEN }}' \
-                --data-urlencode 'description@/dev/stdin' <<< "${{ steps.convert.outputs.html_content }}"}'
+                echo "The HTML of the README file is ${{ steps.convert.outputs.README_HTML }}"
+            # - name: Update modio mod description
+            #   run: |
+            #     curl -X PUT 'https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}' \
+            #     -H 'Authorization: Bearer ${{ secrets.MODIO_TOKEN }}' \
+            #     --data-urlencode 'description@/dev/stdin' <<< "${{ steps.convert.outputs.README_HTML }}"}'
