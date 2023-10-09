@@ -17,7 +17,7 @@ jobs:
               run: cat README.html
             - name: Update modio mod description
               run: |
-                $DESCRIPTION=$(cat README.html)
+                DESCRIPTION=$(cat README.html)
                 curl -X PUT 'https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}' \
                 -H 'Authorization: Bearer ${{ secrets.MODIO_TOKEN }}' \
-                -d 'description=$DESCRIPTION'
+                -d "{\"description\": \"$description\"}"
