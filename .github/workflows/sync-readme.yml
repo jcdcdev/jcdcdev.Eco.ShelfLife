@@ -15,7 +15,7 @@ jobs:
               run: |
                 sudo apt-get install pandoc
                 pandoc .github/README.md -s -o README.html
-                echo "README_HTML=$(cat README.html)" >> "$GITHUB_ENV"
+                echo "README_HTML='$(cat README.html)'" >> "$GITHUB_ENV"
             - name: Use README HTML
               run: |
                 echo "The HTML of the README file is $README_HTML"
