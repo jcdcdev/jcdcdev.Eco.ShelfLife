@@ -14,7 +14,7 @@ jobs:
               id: convert
               run: | 
                 pandoc .github/README.md -o README.html
-                echo "README_HTML=$(cat README.html)" >> $GITHUB_ENV
+                echo "README_HTML=$(tr -d '\n' < README.html)" >> $GITHUB_ENV
             - name: Echo README.html
               run: cat README.html
             - name: Update modio mod description
