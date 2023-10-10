@@ -13,6 +13,7 @@ jobs:
                 sudo apt-get install pandoc
                 sudo apt-get install jq
                 sudo apt-get install zip
+                sudo apt-get install imagemagick
             - name: Convert README to HTML
               id: convert
               run: | 
@@ -43,7 +44,15 @@ jobs:
                     text="${{ github.repository }}#${{ github.repository_owner }}/}"
                     wget -O docs/logo.png "https://dummyimage.com/1280x720/000000/ffffff&text=${text}"
                 fi
-                zip -r -j images.zip docs/screenshots
+                for file in docs/screenshots/*; do
+                  if [[ -f $file ]]; then
+                    filename=$(basename -- "$file")
+                    extension="${filename##*.}"
+                    filename="${filename%.*}"
+                    convert "$file" -resize 1920x1080 -background black -gravity center -extent 1920x1080 "docs/screenshots/${filename}_resized.${extension}"
+                  fi
+                done
+                zip -r -j images.zip docs/screenshots/*_resized.*
                 curl "https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}/media" \
                 -H 'Authorization: Bearer ${{ secrets.MODIO_TOKEN }}' \
                 -F logo=@docs/logo.png \
