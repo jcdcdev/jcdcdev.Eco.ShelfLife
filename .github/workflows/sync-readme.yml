@@ -31,6 +31,7 @@ jobs:
               run: |
                   RESPONSE=$(curl -s -H "Authorization: Bearer ${{secrets.MODIO_TOKEN}}" https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }})
                   IMAGES_JSON=$(echo "$RESPONSE" | jq -r '.media.images[] | @base64')
+                  
                   for image in $IMAGES_JSON; do
                     filename=$(echo "$image" | base64 --decode | jq -r '.filename')
                     curl -X DELETE "https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}/media" \
@@ -39,21 +40,30 @@ jobs:
                   done
             - name: Upload images to mod.io
               run: |
-                if [ ! -f "docs/logo.png" ]; then
-                    echo "docs/logo.png does not exist"
+                LOGO_PATH="docs/logo.png"
+                IMAGES_PATH="docs/screenshots"
+                SIZE="1920x1080"
+                BACKGROUND_COLOR="0a1206"
+
+                if [ ! -f "$LOGO_PATH" ]; then
+                    echo "$LOGO_PATH does not exist"
                     text="${{ github.repository }}#${{ github.repository_owner }}/}"
-                    wget -O docs/logo.png "https://dummyimage.com/1280x720/000000/ffffff&text=${text}"
+                    wget -O $LOGO_PATH "https://dummyimage.com/$SIZE/$BACKGROUND_COLOR/ffffff&text=$text"
                 fi
-                for file in docs/screenshots/*; do
+                convert "$LOGO_PATH" -resize $SIZE -background "#$BACKGROUND_COLOR" -gravity center -extent $SIZE "$LOGO_PATH"
+              
+                for file in $IMAGES_PATH/*; do
                   if [[ -f $file ]]; then
                     filename=$(basename -- "$file")
                     extension="${filename##*.}"
                     filename="${filename%.*}"
-                    convert "$file" -resize 1920x1080 -background black -gravity center -extent 1920x1080 "docs/screenshots/${filename}_resized.${extension}"
+                    convert "$file" -resize $SIZE -background "#$BACKGROUND_COLOR" -gravity center -extent $SIZE "$IMAGES_PATH/${filename}_resized.${extension}"
                   fi
                 done
-                zip -r -j images.zip docs/screenshots/*_resized.*
+
+                zip -r -j images.zip $IMAGES_PATH/*_resized.*
+
                 curl "https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}/media" \
                 -H 'Authorization: Bearer ${{ secrets.MODIO_TOKEN }}' \
-                -F logo=@docs/logo.png \
+                -F logo=@$LOGO_PATH \
                 -F images=@images.zip
