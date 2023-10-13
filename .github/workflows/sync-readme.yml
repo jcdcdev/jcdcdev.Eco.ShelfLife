@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
         LOGO_PATH: "docs/logo.png"
-        RESIZED_LOGO_PATH: "0_logo.png"
+        RESIZED_LOGO_PATH: "0000_logo.png"
         IMAGES_PATH: "docs/screenshots"
         SIZE: "1920x1080"
         BACKGROUND_COLOR: "0a1206"
