@@ -1,20 +1,18 @@
-name: Update modio mod description
+name: Sync modio mod assets
 on:
     workflow_dispatch:
 
 jobs:
     update_mod_description:
         runs-on: ubuntu-latest
+        name: "Update modio mod assets"
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
             - name: Get latest release
-              id: latest_release
               run: |
                 LATEST_RELEASE=$(curl --silent "https://api.github.com/repos/${{ github.repository }}/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
                 echo "LATEST_RELEASE=$LATEST_RELEASE" >> $GITHUB_ENV
-            - name: Use latest release
-              run: echo "Latest release is ${{ env.LATEST_RELEASE }}"
             - name: Install tools
               run: |
                 sudo apt-get install pandoc
@@ -57,14 +55,24 @@ jobs:
                 VERSION="${{ env.LATEST_RELEASE }}"
                 AUTHOR="JCDC DEV"
 
+                JSON_DATA=$(cat <<EOF
+                {
+                  "project": "$PROJECT",
+                  "version": "$VERSION",
+                  "author": "$AUTHOR"
+                }
+                EOF
+                )
+
                 if [ ! -f "$LOGO_PATH" ]; then
                     echo "$LOGO_PATH does not exist"
                     curl "https://api.imejis.io/api/designs/$DESIGN_ID" \
                       --header "dma-api-key: $API_KEY" \
                       --header 'Content-Type: application/json' \
-                      --data '{ "project": "$PROJECT", "version": "$VERSION", "author": "$AUTHOR"}' \
+                      --data "$JSON_DATA" \
                       --output $LOGO_PATH
                 fi
+
                 convert "$LOGO_PATH" -resize $SIZE -background "#$BACKGROUND_COLOR" -gravity center -extent $SIZE "$LOGO_PATH"
               
                 for file in $IMAGES_PATH/*; do
@@ -76,7 +84,8 @@ jobs:
                   fi
                 done
 
-                zip -r -j images.zip $IMAGES_PATH/*_resized.* $LOGO_PATH
+                zip -r -j images.zip $LOGO_PATH
+                zip -r -j images.zip $IMAGES_PATH/*_resized.*
 
                 curl "https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}/media" \
                 -H 'Authorization: Bearer ${{ secrets.MODIO_TOKEN }}' \
