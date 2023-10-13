@@ -8,6 +8,13 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
+            - name: Get latest release
+              id: latest_release
+              run: |
+                LATEST_RELEASE=$(curl --silent "https://api.github.com/repos/${{ github.repository }}/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+                echo "LATEST_RELEASE=$LATEST_RELEASE" >> $GITHUB_ENV
+            - name: Use latest release
+              run: echo "Latest release is ${{ env.LATEST_RELEASE }}"
             - name: Install tools
               run: |
                 sudo apt-get install pandoc
@@ -44,11 +51,19 @@ jobs:
                 IMAGES_PATH="docs/screenshots"
                 SIZE="1920x1080"
                 BACKGROUND_COLOR="0a1206"
+                DESIGN_ID="${{ secrets.DESIGN_ID }}"
+                API_KEY="${{ secrets.IMEJIS_KEY }}"
+                PROJECT="SHELF LIFE"
+                VERSION="${{ env.LATEST_RELEASE }}"
+                AUTHOR="JCDC DEV"
 
                 if [ ! -f "$LOGO_PATH" ]; then
                     echo "$LOGO_PATH does not exist"
-                    text="${{ github.repository }}#${{ github.repository_owner }}/}"
-                    wget -O $LOGO_PATH "https://dummyimage.com/$SIZE/$BACKGROUND_COLOR/ffffff&text=$text"
+                    curl "https://api.imejis.io/api/designs/$DESIGN_ID" \
+                      --header "dma-api-key: $API_KEY" \
+                      --header 'Content-Type: application/json' \
+                      --data '{ "project": "$PROJECT", "version": "$VERSION", "author": "$AUTHOR"}' \
+                      --output $LOGO_PATH
                 fi
                 convert "$LOGO_PATH" -resize $SIZE -background "#$BACKGROUND_COLOR" -gravity center -extent $SIZE "$LOGO_PATH"
               
@@ -61,7 +76,7 @@ jobs:
                   fi
                 done
 
-                zip -r -j images.zip $IMAGES_PATH/*_resized.*
+                zip -r -j images.zip $IMAGES_PATH/*_resized.* $LOGO_PATH
 
                 curl "https://api.mod.io/v1/games/${{ secrets.MODIO_GAME }}/mods/${{ secrets.MODIO_MOD }}/media" \
                 -H 'Authorization: Bearer ${{ secrets.MODIO_TOKEN }}' \
