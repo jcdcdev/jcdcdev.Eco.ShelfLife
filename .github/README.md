@@ -1,5 +1,7 @@
 # jcdcdev.Eco.ShelfLife
 
+![Eco Version](https://badgen.net/static/Eco/v0.10.0) [![Latest version on Github](https://badgen.net/github/tag/jcdcdev/jcdcdev.Eco.ShelfLife?label=Mod)](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/latest) [![Commits](https://badgen.net/github/commits/jcdcdev/jcdcdev.Eco.ShelfLife)](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/commits/main)
+
 ## Install Steps
 
 - Download the latest version from https://mod.io/g/eco/m/jcdcdevecoshelflife
