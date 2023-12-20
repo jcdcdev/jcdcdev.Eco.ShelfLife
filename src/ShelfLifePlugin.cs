@@ -108,7 +108,7 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
 
         var code =
             $$"""
-              using Eco.Gameplay.Components;
+              using Eco.Gameplay.Components.Storage;
               using Eco.Shared.Localization;
               using Eco.Shared.Utils;
               using Eco.Mods.TechTree;
