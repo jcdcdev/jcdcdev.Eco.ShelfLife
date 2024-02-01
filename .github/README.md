@@ -1,16 +1,20 @@
 ## jcdcdev.Eco.ShelfLife
 
-![Eco Version](https://badgen.net/static/Eco/v0.10.1+) [![Latest version on Github](https://badgen.net/github/tag/jcdcdev/jcdcdev.Eco.ShelfLife?label=Mod)](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/latest) [![Commits](https://badgen.net/github/commits/jcdcdev/jcdcdev.Eco.ShelfLife)](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/commits/main)
+![Eco Version](https://badgen.net/static/Eco/v0.10.3+/3a93b4) 
+[![Latest version on Github](https://badgen.net/github/tag/jcdcdev/jcdcdev.Eco.ShelfLife?color=3a93b4&label=Mod)](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/latest)
 
 ## Install Steps
 
-- Download the latest version from https://mod.io/g/eco/m/jcdcdevecoshelflife
-- Extract the zip
-- Copy the extracted `Mods` folder into your Server's `Mods` folder
+- Download the latest version of this mod from [mod.io](https://mod.io/g/eco/m/jcdcdevecoshelflife)
+- Download the latest version of `jcdcdev.Eco.Core` from [mod.io](https://mod.io/g/eco/m/jcdcdevecocore)
+- Extract each zip
+- Go to your Server's root folder
+- Copy the extracted content to `./Mods/UserCode`
 - Start the server
 - On first run the server will shutdown
-    - This is expected behaviour
-
+    - This is expected behaviour ✅
+    - Please restart your server
+    
 ## Configuration 
 
 You can use the Server UI or the config file `jcdcdev.Eco.ShelfLife.eco` to make changes.
