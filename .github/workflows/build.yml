@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: jcdcdev.Eco.ShelfLife
-      PROJECT_PATH: ./src/jcdcdev.Eco.ShelfLife.csproj
+      PROJECT_PATH: ./src/jcdcdev.Eco.ShelfLife/jcdcdev.Eco.ShelfLife.csproj
       BUILD_OUTPUT: ./build-output
       MOD_OUTPUT: ./build-assets/Mods/jcdcdev.Eco.ShelfLife
       ASSET_NAME: jcdcdev.Eco.ShelfLife-dev-${{ github.sha }}

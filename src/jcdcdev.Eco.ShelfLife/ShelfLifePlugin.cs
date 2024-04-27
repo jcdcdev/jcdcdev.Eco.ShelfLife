@@ -65,7 +65,7 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
 
         var builder = ColorLogBuilder.Create();
         builder.AppendLine("RESTART REQUIRED!", ConsoleColor.Red);
-        builder.AppendLine("You MUST restart the server changes to take effect", ConsoleColor.DarkYellow);
+        builder.AppendLine("You MUST restart the server for changes to take effect", ConsoleColor.DarkYellow);
         builder.Log(ModName);
     }
 
@@ -73,7 +73,7 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
     {
         var updated = false;
         var builder = ColorLogBuilder.Create();
-        builder.AppendLine("Applying Shelf Life Modifiers", ConsoleColor.DarkYellow);
+        builder.AppendLine("Applying Shelf Life Modifiers", ConsoleColor.DarkGray);
         builder.Log(ModName);
 
         foreach (var objectName in objects)
@@ -90,7 +90,7 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
             }
             else
             {
-                builder.Append("No changes detected.", ConsoleColor.DarkGray);
+                builder.Append($"{shelfLifeValue:F}", ConsoleColor.DarkGreen);
             }
 
             builder.Log();

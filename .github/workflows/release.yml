@@ -32,7 +32,7 @@ jobs:
       SEMVER: ${{ needs.determine-version.outputs.semVer }}
       ASSET_NAME: jcdcdev.Eco.ShelfLife-${{ needs.determine-version.outputs.semVer }}
       PROJECT_NAME: jcdcdev.Eco.ShelfLife
-      PROJECT_PATH: ./src/jcdcdev.Eco.ShelfLife.csproj
+      PROJECT_PATH: ./src/jcdcdev.Eco.ShelfLife/jcdcdev.Eco.ShelfLife.csproj
       MOD_OUTPUT: ./build-assets/Mods/jcdcdev.Eco.ShelfLife
       ARTIFACT_OUTPUT: ./build-assets
     outputs:
