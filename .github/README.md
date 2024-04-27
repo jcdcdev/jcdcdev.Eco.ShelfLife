@@ -1,7 +1,9 @@
 ## jcdcdev.Eco.ShelfLife
 
-![Eco Version](https://badgen.net/static/Eco/v0.10.3+/3a93b4) 
+![Eco Version](https://badgen.net/static/Eco/v0.10.2.1+/3a93b4)
 [![Latest version on Github](https://badgen.net/github/tag/jcdcdev/jcdcdev.Eco.ShelfLife?color=3a93b4&label=Mod)](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/latest)
+
+Control the shelf life multiplier of your storage objects in Eco.
 
 ## Install Steps
 
@@ -14,10 +16,10 @@
 - On first run the server will shutdown
     - This is expected behaviour ✅
     - Please restart your server
-    
-## Configuration 
 
-You can use the Server UI or the config file `jcdcdev.Eco.ShelfLife.eco` to make changes.
+## Configuration
+
+You can configure the shelf life multiplier through the Server UI or directly in the config file.
 
 **You must restart the server after making changes.**
 
@@ -28,9 +30,32 @@ The default values are the same as the vanilla game:
 - `IndustrialRefrigerator`: 1.5
 - `StorageSilo`: 1.2
 - `PoweredStorageSilo`: 1.5
-- `SeedBank`: 4.0 - (Requires jcdcdev.Eco.SeedStorage)
-- `WoodenSeedBox`: 1.5 - (Requires jcdcdev.Eco.SeedStorage)
+- `SeedBank`: 4.0 - (Requires [jcdcdev.Eco.SeedStorage](https://mod.io/g/eco/m/jcdcdevecoseedstorage))
+- `WoodenSeedBox`: 1.5 - (Requires [jcdcdev.Eco.SeedStorage](https://mod.io/g/eco/m/jcdcdevecoseedstorage))
+
+### Server UI
 
 You can change these values to your needs, but keep in mind that higher values will make the items last longer and lower values will make them spoil faster.
 
-You will notice that different storage containers will have different effects on the shelf life of the items stored in them. You can check the remaining shelf life of an item by hovering over it in your inventory or storage UI.
+![Server UI](https://raw.githubusercontent.com/jcdcdev/jcdcdev.Eco.ShelfLife/main/docs/screenshots/2-config.png)
+
+### Config File
+
+You can find the config file at `./Configs/jcdcdev.Eco.ShelfLife.eco`.
+
+The default values are below:
+
+```json
+{
+  "Icebox": 2.0,
+  "Refrigerator": 2.5,
+  "IndustrialRefrigerator": 3.0,
+  "StorageSilo": 2.0,
+  "PoweredStorageSilo": 3.0,
+  "SeedBank": 4.0,
+  "WoodenSeedBox": 2.0
+}
+```
+
+You will notice that different storage containers will have different effects on the shelf life of the items stored in them. You can check the remaining shelf
+life of an item by hovering over it in your inventory or storage UI.
