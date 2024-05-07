@@ -10,6 +10,8 @@ namespace jcdcdev.Eco.ShelfLife;
 
 public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
 {
+    private readonly IFileStorage _fileSystem = PluginManager.Controller.BaseStorage;
+
     private readonly string[] _objects =
     {
         "IceboxObject",
@@ -23,10 +25,27 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
 
     protected override void InitializeMod(TimedTask timer)
     {
-        _generatedFilesPath = PluginManager.Controller.BaseStorage
-            .GetOrCreateDirectoryAsync("Mods/UserCode/jcdcdev.Eco.ShelfLife/Generated")
+        EnsureDataDirectory()
             .GetAwaiter()
             .GetResult();
+    }
+
+    private async Task EnsureDataDirectory()
+    {
+        _generatedFilesPath = await _fileSystem.GetOrCreateDirectoryAsync("Mods/UserCode/jcdcdev.Eco.ShelfLife/UserCode/AutoGen/WorldObjects");
+
+        // 🧹 TODO remove in future version
+        await DeleteLegacyDirectory();
+    }
+
+    private async Task DeleteLegacyDirectory()
+    {
+        var legacyPath = "Mods/UserCode/jcdcdev.Eco.ShelfLife/Generated";
+        if (await _fileSystem.DirectoryExistsAsync(legacyPath))
+        {
+            Logger.WriteLine($"Deleting legacy directory {legacyPath}", ConsoleColor.DarkYellow);
+            await _fileSystem.DeleteDirectoryAsync(legacyPath);
+        }
     }
 
     protected override void PluginsInitialized()
