@@ -8,44 +8,44 @@ public class ShelfLifeConfig
     [Description("The shelf life multiplier for Icebox")]
     [Category("Base Storage")]
     [Range(1.0f, int.MaxValue)]
-    [DefaultValue(1.2f)]
-    public float Icebox { get; set; } = 1.2f;
+    [DefaultValue(1.6f)]
+    public float Icebox { get; set; } = 1.6f;
 
     [Description("The shelf life multiplier for Refrigerator")]
     [Category("Base Storage")]
     [Range(1, int.MaxValue)]
-    [DefaultValue(1.4f)]
-    public float Refrigerator { get; set; } = 1.4f;
+    [DefaultValue(1.9f)]
+    public float Refrigerator { get; set; } = 1.9f;
 
     [Description("The shelf life multiplier for IndustrialRefrigerator")]
     [Category("Base Storage")]
     [Range(1.0f, int.MaxValue)]
-    [DefaultValue(1.5f)]
-    public float IndustrialRefrigerator { get; set; } = 1.5f;
+    [DefaultValue(2.4f)]
+    public float IndustrialRefrigerator { get; set; } = 2.4f;
 
     [Description("The shelf life multiplier for StorageSilo")]
     [Category("Base Storage")]
     [Range(1.0f, int.MaxValue)]
-    [DefaultValue(1.2f)]
-    public float StorageSilo { get; set; } = 1.2f;
+    [DefaultValue(1.6f)]
+    public float StorageSilo { get; set; } = 1.6f;
 
     [Description("The shelf life multiplier for PoweredStorageSilo")]
     [Category("Base Storage")]
     [Range(1.0f, int.MaxValue)]
-    [DefaultValue(1.5f)]
-    public float PoweredStorageSilo { get; set; } = 1.5f;
+    [DefaultValue(2.4f)]
+    public float PoweredStorageSilo { get; set; } = 2.4f;
 
     [Description("(Requires jcdcdev.Eco.SeedStorage) The shelf life multiplier for SeedBank")]
     [Category("Seed Storage")]
     [Range(1.0f, int.MaxValue)]
-    [DefaultValue(4.0f)]
-    public float SeedBank { get; set; } = 4.0f;
+    [DefaultValue(4.8f)]
+    public float SeedBank { get; set; } = 4.8f;
 
     [Description("(Requires jcdcdev.Eco.SeedStorage) The shelf life multiplier for SeedBox")]
     [Category("Seed Storage")]
     [Range(1.0f, int.MaxValue)]
-    [DefaultValue(1.5f)]
-    public float WoodenSeedBox { get; set; } = 1.5f;
+    [DefaultValue(1.6f)]
+    public float WoodenSeedBox { get; set; } = 1.6f;
 
     public float GetShelfLife(string objectName)
     {

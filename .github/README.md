@@ -25,13 +25,13 @@ You can configure the shelf life multiplier through the Server UI or directly in
 
 The default values are the same as the vanilla game:
 
-- `Icebox`: 1.2
-- `Refrigerator`: 1.4
-- `IndustrialRefrigerator`: 1.5
-- `StorageSilo`: 1.2
-- `PoweredStorageSilo`: 1.5
-- `SeedBank`: 4.0 - (Requires [jcdcdev.Eco.SeedStorage](https://mod.io/g/eco/m/jcdcdevecoseedstorage))
-- `WoodenSeedBox`: 1.5 - (Requires [jcdcdev.Eco.SeedStorage](https://mod.io/g/eco/m/jcdcdevecoseedstorage))
+- `Icebox`: 1.6
+- `Refrigerator`: 1.9
+- `IndustrialRefrigerator`: 2.4
+- `StorageSilo`: 1.6
+- `PoweredStorageSilo`: 2.4
+- `SeedBank`: 4.8 - (Requires [jcdcdev.Eco.SeedStorage](https://mod.io/g/eco/m/jcdcdevecoseedstorage))
+- `WoodenSeedBox`: 1.6 - (Requires [jcdcdev.Eco.SeedStorage](https://mod.io/g/eco/m/jcdcdevecoseedstorage))
 
 ### Server UI
 
