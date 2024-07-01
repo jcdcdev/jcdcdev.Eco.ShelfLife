@@ -34,7 +34,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "feature: Support Eco ${{ steps.sync-eco-package.outputs.target-version }}"
+          commit-message: "feature: Support ${{ env.packageId }} ${{ steps.sync-eco-package.outputs.target-version }}"
           title: "Update ${{ env.packageId }} to ${{ steps.sync-eco-package.outputs.target-version }}"
           body: "This PR updates the ${{ env.packageId }} NuGet package from ${{ steps.sync-eco-package.outputs.source-version }} to ${{ steps.sync-eco-package.outputs.target-version }}."
           branch: "update-${{ env.packageId }}-from-${{ steps.sync-eco-package.outputs.source-version }}-to-${{ steps.sync-eco-package.outputs.target-version }}"
