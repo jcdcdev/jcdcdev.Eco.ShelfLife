@@ -63,11 +63,11 @@ life of an item by hovering over it in your inventory or storage UI.
 ## Version Table
 | Version | Core Version | Game Version |
 |-----|---------| -----------|
-| [0.5.3](https://github.com/jcdcdev//releases/tag/0.5.3) | N/A | N/A |
-| [0.5.2-PullRequest0001.6](https://github.com/jcdcdev//releases/tag/0.5.2-PullRequest0001.6) | N/A | N/A |
-| [0.5.2](https://github.com/jcdcdev//releases/tag/0.5.2) | N/A | N/A |
-| [0.5.1](https://github.com/jcdcdev//releases/tag/0.5.1) | N/A | N/A |
-| [0.5.0](https://github.com/jcdcdev//releases/tag/0.5.0) | N/A | N/A |
+| [0.5.3](https://github.com/jcdcdev//releases/tag/0.5.3) | [0.5.2](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/0.5.2) | 10.2.3 |
+| [0.5.2-PullRequest0001.6](https://github.com/jcdcdev//releases/tag/0.5.2-PullRequest0001.6) | [0.5.0](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/0.5.0) | 10.2.1 |
+| [0.5.2](https://github.com/jcdcdev//releases/tag/0.5.2) | [0.5.1](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/0.5.1) | 10.2.2 |
+| [0.5.1](https://github.com/jcdcdev//releases/tag/0.5.1) | [0.5.0](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/0.5.0) | 10.2.1 |
+| [0.5.0](https://github.com/jcdcdev//releases/tag/0.5.0) | [0.5.0](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/0.5.0) | 10.2.1 |
 | [0.4.1](https://github.com/jcdcdev//releases/tag/0.4.1) | N/A | N/A |
 | [0.4.0](https://github.com/jcdcdev//releases/tag/0.4.0) | N/A | N/A |
 | [0.3.0](https://github.com/jcdcdev//releases/tag/0.3.0) | N/A | N/A |
