@@ -59,3 +59,5 @@ The default values are below:
 
 You will notice that different storage containers will have different effects on the shelf life of the items stored in them. You can check the remaining shelf
 life of an item by hovering over it in your inventory or storage UI.
+
+## Version Table
