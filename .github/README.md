@@ -1,9 +1,16 @@
 ## jcdcdev.Eco.ShelfLife
 
-![Eco Version](https://badgen.net/static/Eco/v0.10.2.1+/3a93b4)
 [![Latest version on Github](https://badgen.net/github/tag/jcdcdev/jcdcdev.Eco.ShelfLife?color=3a93b4&label=Mod)](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/latest)
 
 Control the shelf life multiplier of your storage objects in Eco.
+
+## Upgrading to Version 11
+ 
+Due to changes in the core game you **must** delete the following folder:
+
+`./Mods/UserCode/jcdcdev.Eco.ShelfLife/UserCode`
+
+Your existing configuration **will remain**
 
 ## Install Steps
 

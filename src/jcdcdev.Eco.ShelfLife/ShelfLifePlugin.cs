@@ -51,10 +51,34 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
     protected override void PluginsInitialized()
     {
         var objects = _objects.ToList();
-        if (PluginManager.Controller.Plugins.Any(x => x.GetType().Name == "SeedStoragePlugin"))
+
+        var moddedObjects = new Dictionary<string, string[]>
         {
-            objects.Add("WoodenSeedBoxObject");
-            objects.Add("SeedBankObject");
+            {
+                "SeedStoragePlugin",
+                new[]
+                {
+                    "WoodenSeedBoxObject",
+                    "SeedBankObject"
+                }
+            },
+            // Add modded objects here to enable shelf life configuration
+            // MyMod
+            // {
+            //     "MyModName",
+            //     new[]
+            //     {
+            //         "MyModdedObject"
+            //     }
+            // }
+        };
+
+        foreach (var (pluginName, objectNames) in moddedObjects)
+        {
+            if (PluginManager.Controller.Plugins.Any(x => x.GetType().Name == pluginName))
+            {
+                objects.AddRange(objectNames);
+            }
         }
 
         var updated = GenerateClasses(objects);
@@ -90,29 +114,18 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
 
     private bool GenerateClasses(IEnumerable<string> objects)
     {
-        var updated = false;
-        var builder = ColorLogBuilder.Create();
-        builder.AppendLine("Applying Shelf Life Modifiers", ConsoleColor.DarkGray);
-        builder.Log(ModName);
+        Logger.WriteLine("Applying Shelf Life Modifiers", ConsoleColor.DarkGray);
 
+        var updated = false;
         foreach (var objectName in objects)
         {
             var shelfLifeValue = Config.GetShelfLife(objectName);
-            builder.Append($"{objectName}", ConsoleColor.Cyan);
-            builder.Append(" => ", ConsoleColor.DarkGray);
+            LoggerExtensions.LogShelfLife(objectName, shelfLifeValue);
+
             if (GenerateClassIfNeeded(objectName, shelfLifeValue))
             {
                 updated = true;
-                builder.Append("ShelfLife", ConsoleColor.DarkYellow);
-                builder.Append(" = ", ConsoleColor.DarkGray);
-                builder.Append($"ShelfLife = {shelfLifeValue:F}", ConsoleColor.DarkGreen);
             }
-            else
-            {
-                builder.Append($"{shelfLifeValue:F}", ConsoleColor.DarkGreen);
-            }
-
-            builder.Log();
         }
 
         return updated;
@@ -128,17 +141,20 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
         var code =
             $$"""
               using Eco.Gameplay.Components.Storage;
-              using Eco.Shared.Localization;
               using Eco.Shared.Utils;
               using Eco.Mods.TechTree;
-              namespace Eco.Mods.TechTree {
+              using Eco.Shared.Localization;
+              using Eco.Shared.Logging;
+              
+              namespace Eco.Mods.TechTree
+              {
                   public partial class {{objectName}}
                   {
                       partial void ModsPostInitialize()
                       {
-                            var storage = this.GetComponent<PublicStorageComponent>();
-                            storage.ShelfLifeMultiplier = {{shelfLifeValue:F}}f;
-                            Log.WriteLine(new LocString($"{{objectName}}: ShelfLife = {{shelfLifeValue:F}}"));
+                          var storage = this.GetComponent<PublicStorageComponent>();
+                          storage.ShelfLifeMultiplier = {{shelfLifeValue:F}}f;
+                          Log.Write(new LocString("Shelf Life: {{objectName}} = {{shelfLifeValue:F}}"));
                       }
                   }
               }
