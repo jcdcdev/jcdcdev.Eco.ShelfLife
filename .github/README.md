@@ -70,6 +70,7 @@ life of an item by hovering over it in your inventory or storage UI.
 ## Version Table
 | Version | Core Version | Game Version |
 |-----|---------| -----------|
+| [11.0.5](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.0.5) | [11.0.4](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.0.4) | 11.0.3 |
 | [11.0.4](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.0.4) | [11.0.3](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.0.3) | 11.0.3 |
 | [11.0.3](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.0.3) | [11.0.2](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.0.2) | 11.0.2 |
 | [11.0.2](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.0.2) | [11.0.1](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.0.1) | 11.0.1 |
@@ -82,3 +83,4 @@ life of an item by hovering over it in your inventory or storage UI.
 | [0.4.1](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/0.4.1) | [0.4.1](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/0.4.1) | 10.1 |
 | [0.4.0](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/0.4.0) | [0.4.0](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/0.4.0) | 10.0 |
 | [0.3.0](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/0.3.0) | [0.3.0](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/0.3.0) | 9.7.10 |
+| [0.0.0](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/0.0.0) | [2023.1009.1032](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/2023.1009.1032) | . |
