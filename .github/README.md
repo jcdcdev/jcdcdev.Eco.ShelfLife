@@ -78,6 +78,7 @@ life of an item by hovering over it in your inventory or storage UI.
 | [11.1.4](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.4) | [11.1.5](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.5) | 11.1.5 |
 | [11.1.3](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.3) | [11.1.4](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.4) | 11.1.4 |
 | [11.1.2](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.2) | [11.1.3](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.3) | 11.1.3 |
+| [11.1.11](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.11) | [11.1.12](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.12) | 11.1.12 |
 | [11.1.10](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.10) | [11.1.11](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.11) | 11.1.11 |
 | [11.1.1](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.1) | [11.1.2](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.2) | 11.1.2 |
 | [11.1.0](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.0) | [11.1.0](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.0) | 11.1 |
