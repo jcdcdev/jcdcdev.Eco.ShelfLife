@@ -70,6 +70,7 @@ life of an item by hovering over it in your inventory or storage UI.
 ## Version Table
 | Version | Core Version | Game Version |
 |-----|---------| -----------|
+| [12.0.0](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/12.0.0) | [12.0.0](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/12.0.0) | 12.0 |
 | [11.1.9](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.9) | [11.1.10](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.10) | 11.1.10 |
 | [11.1.8](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.8) | [11.1.9](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.9) | 11.1.9 |
 | [11.1.7](https://github.com/jcdcdev/jcdcdev.Eco.ShelfLife/releases/tag/11.1.7) | [11.1.8](https://github.com/jcdcdev/jcdcdev.Eco.Core/releases/tag/11.1.8) | 11.1.8 |
