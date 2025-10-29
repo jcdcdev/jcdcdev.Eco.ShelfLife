@@ -4,6 +4,12 @@
 
 Control the shelf life multiplier of your storage objects in Eco.
 
+## Upgrading to Version 12
+
+Due to changes in the core game you **must** delete the following folder:
+
+`./Mods/UserCode/jcdcdev.Eco.ShelfLife/UserCode`
+
 ## Upgrading to Version 11
  
 Due to changes in the core game you **must** delete the following folder:

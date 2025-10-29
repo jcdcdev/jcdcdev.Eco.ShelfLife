@@ -1,4 +1,5 @@
-﻿using Eco.Core;
+﻿using System.Text.Json;
+using Eco.Core;
 using Eco.Core.FileStorage;
 using Eco.Core.Plugins;
 using Eco.Core.Utils;
@@ -12,16 +13,41 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
 {
     private readonly IFileStorage _fileSystem = PluginManager.Controller.BaseStorage;
 
-    private readonly string[] _objects =
+    private readonly Dictionary<string, string[]> _moddedObjects = new()
     {
+        {
+            "SeedStoragePlugin",
+            [
+                "WoodenSeedBoxObject",
+                "SeedBankObject"
+            ]
+        },
+        // Add modded objects here to enable shelf life configuration
+        // MyMod
+        // {
+        //     "MyModName",
+        //     new[]
+        //     {
+        //         "MyModdedObject"
+        //     }
+        // }
+    };
+
+    private readonly string[] _objects =
+    [
         "IceboxObject",
         "IndustrialRefrigeratorObject",
         "RefrigeratorObject",
         "StorageSiloObject",
         "PoweredStorageSiloObject"
-    };
+    ];
+
+    private string[] AllObjects => _objects
+        .Concat(_moddedObjects.SelectMany(x => x.Value))
+        .ToArray();
 
     private IFileStorage? _generatedFilesPath;
+    public IFileStorage GeneratedFilesPath => _generatedFilesPath ?? throw new Exception("Mod not initialized");
 
     protected override void InitializeMod(TimedTask timer)
     {
@@ -50,40 +76,10 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
 
     protected override void PluginsInitialized()
     {
-        var objects = _objects.ToList();
-
-        var moddedObjects = new Dictionary<string, string[]>
+        var changesMade = GenerateClasses(AllObjects);
+        if (!changesMade)
         {
-            {
-                "SeedStoragePlugin",
-                new[]
-                {
-                    "WoodenSeedBoxObject",
-                    "SeedBankObject"
-                }
-            },
-            // Add modded objects here to enable shelf life configuration
-            // MyMod
-            // {
-            //     "MyModName",
-            //     new[]
-            //     {
-            //         "MyModdedObject"
-            //     }
-            // }
-        };
-
-        foreach (var (pluginName, objectNames) in moddedObjects)
-        {
-            if (PluginManager.Controller.Plugins.Any(x => x.GetType().Name == pluginName))
-            {
-                objects.AddRange(objectNames);
-            }
-        }
-
-        var updated = GenerateClasses(objects);
-        if (!updated)
-        {
+            Logger.WriteLine("No new changes made to shelf life modifiers since last run", ConsoleColor.DarkGray);
             return;
         }
 
@@ -131,11 +127,30 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
         return updated;
     }
 
+    private bool IsObjectModded(string objectName) => !_objects.Contains(objectName);
+
     private bool GenerateClassIfNeeded(string objectName, float shelfLifeValue)
     {
-        if (_generatedFilesPath == null)
+        if (IsObjectModded(objectName))
         {
-            throw new Exception();
+            foreach (var (pluginName, pluginObjects) in _moddedObjects)
+            {
+                // Continue if this object is not part of the current plugin objects
+                if (!pluginObjects.Any(pluginObject => string.Equals(objectName, pluginObject)))
+                {
+                    continue;
+                }
+
+                // Check if the plugin is loaded
+                if (PluginManager.Controller.Plugins.Any(x => x.GetType().Name == pluginName))
+                {
+                    // Plugin is loaded, generate the class
+                    break;
+                }
+
+                // Plugin is not loaded, delete any existing class
+                return DeleteObjectClassIfExists(objectName);
+            }
         }
 
         var code =
@@ -145,7 +160,7 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
               using Eco.Mods.TechTree;
               using Eco.Shared.Localization;
               using Eco.Shared.Logging;
-              
+
               namespace Eco.Mods.TechTree
               {
                   public partial class {{objectName}}
@@ -160,7 +175,7 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
               }
               """;
 
-        var filePath = Path.Combine(_generatedFilesPath.QualifiedName, $"{objectName}.cs");
+        var filePath = GetFilePathForObject(objectName);
         if (File.Exists(filePath))
         {
             var existing = File.ReadAllText(filePath);
@@ -173,5 +188,23 @@ public class ShelfLifePlugin : PluginBase<ShelfLifeConfig>
         File.WriteAllText(filePath, code);
 
         return true;
+    }
+
+    private bool DeleteObjectClassIfExists(string objectName)
+    {
+        var filePath = GetFilePathForObject(objectName);
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+            return true;
+        }
+
+        return false;
+    }
+
+    private string GetFilePathForObject(string objectName)
+    {
+        var filePath = Path.Combine(GeneratedFilesPath.QualifiedName, $"{objectName}.cs");
+        return filePath;
     }
 }
