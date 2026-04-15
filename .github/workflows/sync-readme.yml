@@ -19,7 +19,7 @@ jobs:
       - name: Get README
         id: get-readme
         run: |
-          result=$(pwsh ./src/get-version-table.ps1 -ProjectId "jcdcdev.Eco.SeedStorage")
+          result=$(pwsh ./src/get-version-table.ps1 -ProjectId "jcdcdev.Eco.ShelfLife")
           {
             echo 'result<<EOF'
             echo "${result}"
@@ -55,7 +55,7 @@ jobs:
           images-path: "docs/screenshots"
           readme-path: ".github/README.md"
           project-author: "ECO.JCDC.DEV"
-          project-name: "SEED STORAGE"
+          project-name: "SHELF LIFE"
           imejis-generate-image: true
           imejis-design-id: "${{ secrets.DESIGN_ID }}"
           imejis-key: "${{ secrets.IMEJIS_KEY }}"
